@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel do Casal ❤️</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="background"></div>
+<div class="container">
+<div id="login">
+    <h1>❤️ Painel do Casal</h1>
+    <label>Senha</label>
+    <input
+    type="password"
+    id="senha"
+    placeholder="Digite a senha">
+    <button onclick="entrar()">
+        Entrar
+    </button>
+</div>
+<div
+id="painel"
+style="display:none;">
+    <h1>Criar Site ❤️</h1>
+    <label>Seu Nome</label>
+    <input
+    id="nomeEle"
+    placeholder="Seu nome">
+    <label>Nome dela</label>
+    <input
+    id="nomeEla"
+    placeholder="Nome dela">
+    <label>Data do namoro</label>
+    <input
+    type="date"
+    id="data">
+    <label>Mensagem especial</label>
+    <textarea
+    id="mensagem"
+    rows="6"
+    placeholder="Escreva uma carta..."></textarea>
+    <label>Música (link Spotify ou YouTube)</label>
+    <input
+    id="musica"
+    placeholder="Cole o link">
+    <label>Fotos do casal</label>
+    <input
+    type="file"
+    id="fotos"
+    multiple
+    accept="image/*">
+    <div
+    id="progresso"
+    style="margin-top:15px;">
+    </div>
+    <button onclick="criar()">
+        Criar Site
+    </button>
+    <div id="linkGerado"></div>
+</div>
+</div>
+<script type="module" src="admin.js"></script>
+</body>
+</html>
