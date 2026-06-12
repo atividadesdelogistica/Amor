@@ -1,27 +1,34 @@
-import { db } from "./firebase-config.js";
+import { db, storage } from "./firebase-config.js";
 
 import {
-  collection,
   doc,
   setDoc
 } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
+import {
+  ref,
+  uploadBytesResumable,
+  getDownloadURL
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-storage.js";
+
 const SENHA = "123456";
 
-window.entrar = function () {
+window.entrar = () => {
 
-  const senha = document.getElementById("senha").value;
+  const senha =
+    document.getElementById("senha").value;
 
   if (senha === SENHA) {
 
-    document.getElementById("login").style.display = "none";
+    document.getElementById("login").style.display =
+      "none";
 
-    document.getElementById("painel").style.display = "block";
+    document.getElementById("painel").style.display =
+      "block";
 
   } else {
 
-    document.getElementById("erro").innerText =
-      "Senha incorreta";
+    alert("Senha incorreta");
 
   }
 
@@ -29,17 +36,15 @@ window.entrar = function () {
 
 function gerarCodigo() {
 
-  const caracteres =
+  const chars =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
   let codigo = "";
 
   for (let i = 0; i < 8; i++) {
 
-    codigo += caracteres.charAt(
-      Math.floor(
-        Math.random() * caracteres.length
-      )
+    codigo += chars.charAt(
+      Math.floor(Math.random() * chars.length)
     );
 
   }
@@ -48,7 +53,67 @@ function gerarCodigo() {
 
 }
 
-window.criar = async function () {
+async function uploadImagem(arquivo, codigo) {
+
+  return new Promise((resolve, reject) => {
+
+    const nomeArquivo =
+      Date.now() + "_" + arquivo.name;
+
+    const storageRef = ref(
+      storage,
+      `casais/${codigo}/${nomeArquivo}`
+    );
+
+    const uploadTask =
+      uploadBytesResumable(
+        storageRef,
+        arquivo
+      );
+
+    uploadTask.on(
+
+      "state_changed",
+
+      (snapshot) => {
+
+        const progresso =
+          (
+            snapshot.bytesTransferred /
+            snapshot.totalBytes
+          ) * 100;
+
+        document.getElementById(
+          "progresso"
+        ).innerText =
+          `Upload ${Math.round(progresso)}%`;
+
+      },
+
+      (erro) => {
+
+        reject(erro);
+
+      },
+
+      async () => {
+
+        const url =
+          await getDownloadURL(
+            uploadTask.snapshot.ref
+          );
+
+        resolve(url);
+
+      }
+
+    );
+
+  });
+
+}
+
+window.criar = async () => {
 
   try {
 
@@ -67,11 +132,8 @@ window.criar = async function () {
     const musica =
       document.getElementById("musica").value;
 
-    const fotosTexto =
-      document.getElementById("fotos").value;
-
-    const eventosTexto =
-      document.getElementById("eventos").value;
+    const arquivos =
+      document.getElementById("fotos").files;
 
     if (
       !nomeEle ||
@@ -87,18 +149,31 @@ window.criar = async function () {
 
     }
 
-    const fotos = fotosTexto
-      .split("\n")
-      .map(f => f.trim())
-      .filter(f => f !== "");
+    const codigo =
+      gerarCodigo();
 
-    const eventos = eventosTexto
-      .split("\n")
-      .map(item => ({
-        titulo: item
-      }));
+    let urlsFotos = [];
 
-    const codigo = gerarCodigo();
+    document.getElementById(
+      "progresso"
+    ).innerText =
+      "Enviando fotos...";
+
+    for (
+      let i = 0;
+      i < arquivos.length;
+      i++
+    ) {
+
+      const url =
+        await uploadImagem(
+          arquivos[i],
+          codigo
+        );
+
+      urlsFotos.push(url);
+
+    }
 
     const dados = {
 
@@ -114,9 +189,7 @@ window.criar = async function () {
 
       musicaPrincipal: musica,
 
-      fotos,
-
-      eventos,
+      fotos: urlsFotos,
 
       criadoEm:
         new Date().toISOString()
@@ -136,28 +209,36 @@ window.criar = async function () {
       "linkGerado"
     ).innerHTML = `
 
-      <h3>❤️ Site criado!</h3>
+      <h2>❤️ Site criado!</h2>
 
-      <p>${link}</p>
+      <input
+      value="${link}"
+      readonly
+      style="
+      width:100%;
+      padding:12px;
+      border-radius:10px;
+      ">
 
-      <br>
+      <br><br>
 
       <button onclick="navigator.clipboard.writeText('${link}')">
-        Copiar Link
+      Copiar Link
       </button>
 
     `;
 
-    alert(
-      "Site criado com sucesso!"
-    );
+    document.getElementById(
+      "progresso"
+    ).innerText =
+      "Concluído ✅";
 
   } catch (erro) {
 
     console.error(erro);
 
     alert(
-      "Erro ao salvar no Firebase."
+      "Erro ao criar site."
     );
 
   }
