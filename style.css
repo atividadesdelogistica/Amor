@@ -1,0 +1,491 @@
+/* ===== FONTES ===== */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+/* ===== RESET ===== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    min-height:100vh;
+    background:linear-gradient(
+        135deg,
+        #0f172a,
+        #1e1b4b,
+        #312e81,
+        #4c1d95
+    );
+    background-size:400% 400%;
+    animation:bgMove 15s ease infinite;
+    color:white;
+    overflow-x:hidden;
+}
+
+/* ===== FUNDO ANIMADO ===== */
+
+.background{
+    position:fixed;
+    inset:0;
+    z-index:-2;
+}
+
+.background::before{
+    content:'';
+    position:absolute;
+    width:500px;
+    height:500px;
+    background:#ff4da6;
+    border-radius:50%;
+    filter:blur(160px);
+    top:-150px;
+    left:-100px;
+    opacity:.35;
+}
+
+.background::after{
+    content:'';
+    position:absolute;
+    width:500px;
+    height:500px;
+    background:#7c3aed;
+    border-radius:50%;
+    filter:blur(160px);
+    bottom:-150px;
+    right:-100px;
+    opacity:.35;
+}
+
+/* ===== CONTAINER ===== */
+
+.container{
+    width:100%;
+    max-width:900px;
+    margin:auto;
+    padding:30px 20px;
+}
+
+/* ===== LOGIN E PAINEL ===== */
+
+#login,
+#painel{
+    background:rgba(255,255,255,.08);
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+
+    border:1px solid rgba(255,255,255,.15);
+
+    border-radius:30px;
+
+    padding:35px;
+
+    box-shadow:
+    0 20px 50px rgba(0,0,0,.25);
+
+    animation:fadeUp .7s ease;
+}
+
+/* ===== TITULOS ===== */
+
+h1{
+    text-align:center;
+    font-size:2.2rem;
+    margin-bottom:25px;
+
+    background:linear-gradient(
+        90deg,
+        #fff,
+        #ffd6ea,
+        #ffffff
+    );
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+h2{
+    margin-bottom:15px;
+}
+
+/* ===== LABELS ===== */
+
+label{
+    display:block;
+    margin-top:18px;
+    margin-bottom:8px;
+
+    color:#ffffff;
+    font-weight:600;
+}
+
+/* ===== INPUTS ===== */
+
+input,
+textarea,
+select{
+    width:100%;
+
+    padding:15px;
+
+    border:none;
+
+    outline:none;
+
+    border-radius:18px;
+
+    background:rgba(255,255,255,.12);
+
+    color:#fff;
+
+    font-size:15px;
+
+    border:1px solid rgba(255,255,255,.12);
+
+    transition:.3s;
+}
+
+input::placeholder,
+textarea::placeholder{
+    color:rgba(255,255,255,.7);
+}
+
+input:focus,
+textarea:focus{
+    border-color:#ff4da6;
+
+    box-shadow:
+    0 0 0 4px rgba(255,77,166,.2);
+}
+
+textarea{
+    resize:none;
+}
+
+/* ===== BOTÕES ===== */
+
+button{
+    width:100%;
+
+    margin-top:20px;
+
+    border:none;
+
+    cursor:pointer;
+
+    padding:16px;
+
+    border-radius:18px;
+
+    font-size:16px;
+
+    font-weight:700;
+
+    color:white;
+
+    background:linear-gradient(
+        135deg,
+        #ff4da6,
+        #7c3aed
+    );
+
+    transition:.3s;
+}
+
+button:hover{
+    transform:translateY(-3px);
+
+    box-shadow:
+    0 15px 30px rgba(255,77,166,.35);
+}
+
+button:active{
+    transform:scale(.98);
+}
+
+/* ===== LINK GERADO ===== */
+
+#linkGerado{
+    margin-top:25px;
+
+    padding:15px;
+
+    border-radius:18px;
+
+    text-align:center;
+
+    background:rgba(255,255,255,.08);
+
+    word-break:break-all;
+}
+
+/* ===== CARD PREMIUM ===== */
+
+.card{
+    background:rgba(255,255,255,.08);
+
+    backdrop-filter:blur(20px);
+
+    border:1px solid rgba(255,255,255,.12);
+
+    border-radius:25px;
+
+    padding:25px;
+
+    margin-top:20px;
+}
+
+/* ===== HERO ===== */
+
+.hero{
+    text-align:center;
+    padding:70px 20px;
+}
+
+.hero h1{
+    font-size:3rem;
+}
+
+.hero p{
+    color:rgba(255,255,255,.85);
+    margin-top:10px;
+}
+
+/* ===== CONTADOR ===== */
+
+.contador{
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(120px,1fr));
+
+    gap:15px;
+
+    margin-top:30px;
+}
+
+.box-tempo{
+    background:rgba(255,255,255,.08);
+
+    border:1px solid rgba(255,255,255,.12);
+
+    border-radius:22px;
+
+    text-align:center;
+
+    padding:20px;
+}
+
+.box-tempo h3{
+    font-size:2rem;
+}
+
+.box-tempo span{
+    color:#ddd;
+}
+
+/* ===== GALERIA ===== */
+
+.galeria{
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fill,minmax(180px,1fr));
+
+    gap:15px;
+
+    margin-top:25px;
+}
+
+.galeria img{
+    width:100%;
+    height:220px;
+
+    object-fit:cover;
+
+    border-radius:20px;
+
+    transition:.4s;
+
+    cursor:pointer;
+}
+
+.galeria img:hover{
+    transform:scale(1.04);
+}
+
+/* ===== TIMELINE ===== */
+
+.timeline{
+    margin-top:25px;
+}
+
+.timeline-item{
+    position:relative;
+
+    padding-left:30px;
+
+    margin-bottom:25px;
+}
+
+.timeline-item::before{
+    content:'';
+
+    position:absolute;
+
+    left:0;
+
+    top:8px;
+
+    width:14px;
+    height:14px;
+
+    background:#ff4da6;
+
+    border-radius:50%;
+}
+
+.timeline-item::after{
+    content:'';
+
+    position:absolute;
+
+    left:6px;
+
+    top:20px;
+
+    width:2px;
+
+    height:100%;
+
+    background:rgba(255,255,255,.2);
+}
+
+/* ===== MÚSICAS ===== */
+
+.music-card{
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:15px;
+
+    margin-top:12px;
+
+    background:rgba(255,255,255,.08);
+
+    padding:15px;
+
+    border-radius:18px;
+}
+
+/* ===== CARTA ===== */
+
+.carta{
+    line-height:1.8;
+
+    color:#f5f5f5;
+
+    font-size:1rem;
+}
+
+/* ===== CORAÇÕES ===== */
+
+.heart{
+    position:fixed;
+
+    color:#ff4da6;
+
+    animation:floatHeart 5s linear forwards;
+
+    pointer-events:none;
+}
+
+/* ===== SCROLL ===== */
+
+::-webkit-scrollbar{
+    width:8px;
+}
+
+::-webkit-scrollbar-track{
+    background:transparent;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#ff4da6;
+    border-radius:999px;
+}
+
+/* ===== ANIMAÇÕES ===== */
+
+@keyframes fadeUp{
+
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes bgMove{
+
+    0%{
+        background-position:0% 50%;
+    }
+
+    50%{
+        background-position:100% 50%;
+    }
+
+    100%{
+        background-position:0% 50%;
+    }
+}
+
+@keyframes floatHeart{
+
+    from{
+        transform:translateY(0);
+        opacity:1;
+    }
+
+    to{
+        transform:translateY(-700px);
+        opacity:0;
+    }
+}
+
+/* ===== RESPONSIVO ===== */
+
+@media(max-width:768px){
+
+    h1{
+        font-size:1.8rem;
+    }
+
+    .hero h1{
+        font-size:2.2rem;
+    }
+
+    #login,
+    #painel{
+        padding:25px;
+    }
+
+    .galeria img{
+        height:180px;
+    }
+}
