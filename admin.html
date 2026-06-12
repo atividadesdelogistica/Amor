@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel Admin ❤️</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="background"></div>
+<div class="container">
+<!-- LOGIN -->
+<div id="login" class="card">
+    <h1>❤️ Painel do Casal</h1>
+    <p>Digite a senha para acessar</p>
+    <input
+    type="password"
+    id="senha"
+    placeholder="Senha">
+    <button onclick="entrar()">
+        Entrar
+    </button>
+</div>
+<!-- PAINEL -->
+<div
+id="painel"
+class="card"
+style="display:none;">
+    <h1>Criar Novo Site ❤️</h1>
+    <label>Seu nome</label>
+    <input
+    type="text"
+    id="nomeEle"
+    placeholder="Ex: João">
+    <label>Nome dela</label>
+    <input
+    type="text"
+    id="nomeEla"
+    placeholder="Ex: Maria">
+    <label>Data do relacionamento</label>
+    <input
+    type="date"
+    id="data">
+    <label>Mensagem especial</label>
+    <textarea
+    id="mensagem"
+    rows="6"
+    placeholder="Escreva sua carta aqui..."></textarea>
+    <label>Música (Spotify ou YouTube)</label>
+    <input
+    type="text"
+    id="musica"
+    placeholder="Cole o link">
+    <label>Fotos do casal</label>
+    <input
+    type="file"
+    id="fotos"
+    multiple
+    accept="image/*">
+    <div id="progresso"></div>
+    <button onclick="criar()">
+        Criar Site ❤️
+    </button>
+    <div id="linkGerado"></div>
+</div>
+</div>
+<script type="module" src="admin.js"></script>
+</body>
+</html>
